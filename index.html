@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script>
+			"use strict";
+
+			window.addEventListener("load", async function() {
+				let test = await fetch("target/wasm32-unknown-unknown/debug/test.wasm")
+					.then(x => x.arrayBuffer())
+					.then(x => WebAssembly.compile(x))
+					.then(x => WebAssembly.instantiate(x, {}));
+
+				console.log(test);
+
+				for (let exp in test.exports) {
+					if (exp.startsWith("export_")) {
+						document.body.innerHTML += exp + "<br/>";
+					}
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<h2>exported funcs:</h2>
+	</body>
+</html>
