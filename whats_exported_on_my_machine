@@ -1,0 +1,4 @@
+export_bin_main
+export_bin_blah
+export_lib_this_will_be_exported
+export_lib_main
